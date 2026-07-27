@@ -1,7 +1,19 @@
 import { JobStatus, UrlStatus } from './job-status';
+import {
+  IsArray,
+  ArrayNotEmpty,
+  ArrayMaxSize,
+  ArrayUnique,
+  IsUrl,
+} from 'class-validator';
 
-export interface CreateJobDto {
-  urls: string[];
+export class CreateJobDto {
+  @IsArray() // urls должно быть массивом
+  @ArrayNotEmpty()
+  @ArrayMaxSize(100)
+  @ArrayUnique()
+  @IsUrl({}, { each: true })
+  urls!: string[];
 }
 
 export interface UrlCheckDto {
@@ -25,4 +37,8 @@ export interface JobSummaryDto {
 
 export interface JobDetailsDto extends JobSummaryDto {
   urls: UrlCheckDto[];
+}
+
+export interface CreateJobResponseDto {
+  jobId: string;
 }
