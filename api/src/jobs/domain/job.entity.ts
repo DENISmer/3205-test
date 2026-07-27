@@ -52,7 +52,7 @@ export class JobEntity {
     );
   }
 
-  private isFinal(): boolean {
+  isFinal(): boolean {
     return [
       JobStatus.Completed,
       JobStatus.Cancelled,
