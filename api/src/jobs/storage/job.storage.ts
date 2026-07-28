@@ -6,4 +6,5 @@ export interface JobStorage {
   save(job: JobEntity): void;
   findById(id: string): JobEntity | undefined;
   findAll(): JobEntity[];
+  deleteAll(): void;
 }

@@ -34,4 +34,5 @@ export interface JobsState {
   refreshList: () => Promise<void>;
   selectJob: (id: string) => Promise<void>;
   cancelActiveJob: () => Promise<void>;
+  deleteAllJobs: () => Promise<void>;
 }

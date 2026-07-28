@@ -50,6 +50,17 @@ export class JobsService {
     return this.toDetailsDto(job);
   }
 
+  deleteAll(): void {
+    for (const job of this.storage.findAll()) {
+      if (!job.isFinal()) {
+        job.cancel();
+        this.cancellationRegistry.abort(job.id);
+      }
+    }
+
+    this.storage.deleteAll();
+  }
+
   findOrThrow(id: string): JobEntity {
     const job = this.storage.findById(id);
     if (!job) throw new NotFoundException(`Job ${id} not found`);

@@ -87,6 +87,25 @@ code {
   background: #dc2626;
 }
 
+.button-danger {
+  width: auto;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.85rem;
+  background: #dc2626;
+  border-color: #dc2626;
+  color: #fff;
+}
+
+.button-danger:hover {
+  background: #b91c1c;
+  border-color: #b91c1c;
+}
+
+.button-danger[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

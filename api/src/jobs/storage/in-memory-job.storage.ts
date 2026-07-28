@@ -26,4 +26,8 @@ export class InMemoryJobStorage implements JobStorage {
   findAll(): JobEntity[] {
     return Array.from(this.jobs.values());
   }
+
+  deleteAll(): void {
+    this.jobs.clear();
+  }
 }

@@ -5,12 +5,36 @@ export function JobList() {
   const items = useJobsStore((s) => s.jobs);
   const activeJobId = useJobsStore((s) => s.activeJobId);
   const selectJob = useJobsStore((s) => s.selectJob);
+  const deleteAllJobs = useJobsStore((s) => s.deleteAllJobs);
+
+  const handleDeleteAll = () => {
+    const activeCount = items.filter(
+      (job) => job.status === 'pending' || job.status === 'in_progress',
+    ).length;
+
+    const message =
+      activeCount > 0
+        ? `Удалить все задания? ${activeCount} ещё выполняются — они будут остановлены.`
+        : 'Удалить все задания?';
+
+    if (window.confirm(message)) {
+      deleteAllJobs();
+    }
+  };
 
   return (
     <article>
       <header className="row">
-        Список заданий
-        <small>{items.length}</small>
+        <span>
+          Список заданий <small>{items.length}</small>
+        </span>
+        <button
+          className="button-danger"
+          disabled={items.length === 0}
+          onClick={handleDeleteAll}
+        >
+          Удалить все
+        </button>
       </header>
 
       {items.length === 0 ? (

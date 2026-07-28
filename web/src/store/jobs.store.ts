@@ -1,6 +1,12 @@
 import { create } from 'zustand';
 import type { JobsState } from '../types/job.types';
-import { cancelJob, createJob, getJob, getJobs } from '../api/jobs.api';
+import {
+  cancelJob,
+  createJob,
+  deleteAllJobs,
+  getJob,
+  getJobs,
+} from '../api/jobs.api';
 
 export const useJobsStore = create<JobsState>((set, get) => ({
   jobs: [],
@@ -58,6 +64,16 @@ export const useJobsStore = create<JobsState>((set, get) => ({
       await get().refreshList();
     } catch (err) {
       if (get().activeJobId !== id) return;
+      set({ error: err instanceof Error ? err.message : 'Unknown error' });
+    }
+  },
+
+  deleteAllJobs: async () => {
+    try {
+      await deleteAllJobs();
+      set({ activeJobId: null, activeJob: null });
+      await get().refreshList();
+    } catch (err) {
       set({ error: err instanceof Error ? err.message : 'Unknown error' });
     }
   },

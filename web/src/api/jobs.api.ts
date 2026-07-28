@@ -27,6 +27,10 @@ async function request<T>(path: string, options?: RequestInit): Promise<T> {
     throw new HttpError(response.status, body?.message ?? response.statusText);
   }
 
+  if (response.status === 204) {
+    return undefined as T;
+  }
+
   return response.json() as Promise<T>;
 }
 
@@ -48,4 +52,8 @@ export function getJob(id: string, signal?: AbortSignal) {
 
 export function cancelJob(id: string, signal?: AbortSignal) {
   return request<JobDetails>(`/jobs/${id}`, { method: 'DELETE', signal });
+}
+
+export function deleteAllJobs(signal?: AbortSignal) {
+  return request<void>('/jobs', { method: 'DELETE', signal });
 }
