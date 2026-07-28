@@ -15,7 +15,12 @@ export function JobDetails() {
 
   return (
     <article>
-      <header>Задание {job.id.slice(0, 6)}</header>
+      <header className="row">
+        <span>
+          Задание <code>{job.id.slice(0, 6)}</code>
+        </span>
+        <span className={`badge badge--${job.status}`}>{job.status}</span>
+      </header>
       <div className="overflow-auto">
         <table>
           <thead>

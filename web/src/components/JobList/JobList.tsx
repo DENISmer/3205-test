@@ -8,13 +8,7 @@ export function JobList() {
 
   return (
     <article>
-      <header
-        style={{
-          display: 'flex',
-          alignContent: 'center',
-          justifyContent: 'space-between',
-        }}
-      >
+      <header className="row">
         Список заданий
         <small>{items.length}</small>
       </header>
@@ -22,11 +16,10 @@ export function JobList() {
       {items.length === 0 ? (
         <span>Нет заданий на проверку</span>
       ) : (
-        <ul style={{ listStyle: 'none', padding: '2px' }} className="job-list">
+        <ul className="job-list">
           {items.map((job) => (
-            <li style={{ width: '100%' }} key={job.id}>
+            <li key={job.id}>
               <button
-                style={{ width: '100%' }}
                 aria-current={job.id === activeJobId}
                 onClick={() => selectJob(job.id)}
               >

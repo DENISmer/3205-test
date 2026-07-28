@@ -7,6 +7,70 @@ li::marker {
   content: ''; /* Overwrites the marker with an empty string */
 }
 
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.job-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.job-list button {
+  width: 100%;
+  background: var(--pico-card-sectioning-background-color);
+}
+
+.job-list button[aria-current='true'] {
+  border-color: var(--pico-primary-border);
+}
+
+code {
+  display: inline-block;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  background: #1e3a5f;
+  color: #93c5fd;
+  font-size: 0.75rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.badge--pending {
+  background: #6b7280;
+}
+
+.badge--in_progress {
+  background: #2563eb;
+}
+
+.badge--completed {
+  background: #16a34a;
+}
+
+.badge--cancelled {
+  background: #f59e0b;
+}
+
+.badge--failed {
+  background: #dc2626;
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
