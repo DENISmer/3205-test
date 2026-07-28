@@ -10,3 +10,11 @@ export interface JobSummary {
   successCount: number;
   errorCount: number;
 }
+
+export interface CreateJobRequest {
+  urls: string[];
+}
+
+export interface CreateJobResponse {
+  jobId: string;
+}
