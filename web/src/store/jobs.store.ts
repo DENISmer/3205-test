@@ -35,7 +35,7 @@ export const useJobsStore = create<JobsState>((set, get) => ({
     set({ activeJobId: id, activeJob: null });
     try {
       const job = await getJob(id);
-      if (get().activeJobId !== id) return;
+      if (get().activeJobId !== id) return; //по сути абортим селект, что бы рейсов не было
       set({ activeJob: job });
     } catch (err) {
       if (get().activeJobId !== id) return;

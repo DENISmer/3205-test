@@ -1,18 +1,20 @@
-import type { JobDetails } from '../../types/job-details.types';
+import { useJobsStore } from '../../store/jobs.store';
 
-export function JobDetails(props: JobDetails) {
-  if (!props.urls) {
+export function JobDetails() {
+  const job = useJobsStore((s) => s.activeJob);
+  const cancelActiveJob = useJobsStore((s) => s.cancelActiveJob);
+
+  if (!job) {
     return (
       <article>
-        <header>Задание {props.id}</header>
-        <span aria-busy="true">Загружаем</span>
+        <p>Выбери задание из списка слева</p>
       </article>
     );
   }
 
   return (
     <article>
-      <header>Задание {props.id}</header>
+      <header>Задание {job.id.slice(0, 6)}</header>
       <table>
         <thead>
           <tr>
@@ -24,19 +26,22 @@ export function JobDetails(props: JobDetails) {
           </tr>
         </thead>
         <tbody>
-          {props.urls &&
-            props.urls.length &&
-            props.urls.map((item) => (
-              <tr>
-                <th scope="row">{item.url}</th>
-                <td>{item.status}</td>
-                <td>{item.httpStatus}</td>
-                <td>{item.error}</td>
-                <td>{item.durationMs}</td>
-              </tr>
-            ))}
+          {job.urls.map((item) => (
+            <tr key={item.url}>
+              <th scope="row">{item.url}</th>
+              <td>{item.status}</td>
+              <td>{item.httpStatus ?? '—'}</td>
+              <td>{item.error ?? '—'}</td>
+              <td>
+                {item.durationMs
+                  ? `${(item.durationMs / 1000).toFixed(1)} с`
+                  : '—'}
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
+      <button onClick={cancelActiveJob}>Отменить задание</button>
     </article>
   );
 }

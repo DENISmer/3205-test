@@ -1,13 +1,11 @@
-import { useState, type SubmitEvent } from 'react';
+import { useState, type FormEvent } from 'react';
+import { useJobsStore } from '../../store/jobs.store';
 
-interface UrlFormProps {
-  onSubmit: (urls: string[]) => void;
-}
-
-export function UrlForm({ onSubmit }: UrlFormProps) {
+export function UrlForm() {
   const [text, setText] = useState('');
+  const submitUrls = useJobsStore((s) => s.submitUrls);
 
-  const handleSubmit = (event: SubmitEvent) => {
+  const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
 
     const urls = text
@@ -17,7 +15,8 @@ export function UrlForm({ onSubmit }: UrlFormProps) {
 
     if (urls.length === 0) return;
 
-    onSubmit(urls);
+    submitUrls(urls);
+    setText('');
   };
 
   return (

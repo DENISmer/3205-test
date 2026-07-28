@@ -1,38 +1,27 @@
-import type { JobSummary } from '../../types/job.types';
+import { useJobsStore } from '../../store/jobs.store';
 import { formatTime } from '../../utils/lib';
 
-interface JobListProps {
-  items: JobSummary[] | null;
-  activeJobId: string | null;
-  onSelect: (id: string) => void;
-}
-
-export function JobList(props: JobListProps) {
-  if (!props.items) {
-    return (
-      <article>
-        <header>Список заданий</header>
-        <span aria-busy="true">Загружаем</span>
-      </article>
-    );
-  }
+export function JobList() {
+  const items = useJobsStore((s) => s.jobs);
+  const activeJobId = useJobsStore((s) => s.activeJobId);
+  const selectJob = useJobsStore((s) => s.selectJob);
 
   return (
     <article>
       <header>
         Список заданий
-        <small>{props.items.length}</small>
+        <small>{items.length}</small>
       </header>
 
-      {props.items.length === 0 ? (
+      {items.length === 0 ? (
         <span>Нет заданий на проверку</span>
       ) : (
         <ul className="job-list">
-          {props.items.map((job) => (
+          {items.map((job) => (
             <li key={job.id}>
               <button
-                aria-current={job.id === props.activeJobId}
-                onClick={() => props.onSelect(job.id)}
+                aria-current={job.id === activeJobId}
+                onClick={() => selectJob(job.id)}
               >
                 <span className="row">
                   <code>{job.id.slice(0, 6)}</code>
@@ -43,8 +32,8 @@ export function JobList(props: JobListProps) {
                 <span className="row">
                   <small>{formatTime(job.createdAt)}</small>
                   <small>
-                    {job.processed} / {job.totalUrls} · {job.successCount} ok ·{' '}
-                    {job.errorCount} err
+                    {job.successCount + job.errorCount} / {job.totalUrls} ·{' '}
+                    {job.successCount} ok · {job.errorCount} err
                   </small>
                 </span>
               </button>
