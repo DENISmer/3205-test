@@ -36,7 +36,11 @@ export function JobDetails() {
             {job.urls.map((item) => (
               <tr key={item.url}>
                 <th scope="row">{item.url}</th>
-                <td>{item.status}</td>
+                <td>
+                  <span className={`badge badge--${item.status}`}>
+                    {item.status}
+                  </span>
+                </td>
                 <td>{item.httpStatus ?? '—'}</td>
                 <td>{item.error ?? '—'}</td>
                 <td>

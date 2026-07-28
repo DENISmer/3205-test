@@ -14,6 +14,14 @@ li::marker {
   gap: 0.5rem;
 }
 
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex: 1;
+  min-width: 0;
+}
+
 .job-list {
   list-style: none;
   padding: 0;
@@ -68,6 +76,14 @@ code {
 }
 
 .badge--failed {
+  background: #dc2626;
+}
+
+.badge--success {
+  background: #16a34a;
+}
+
+.badge--error {
   background: #dc2626;
 }
 
