@@ -1,0 +1,16 @@
+services:
+  api:
+    build:
+      context: ./api
+    env_file:
+      - .env
+    ports:
+      - '${API_PORT:-3000}:3000'
+
+  web:
+    build:
+      context: ./web
+    ports:
+      - '${WEB_PORT:-5173}:80'
+    depends_on:
+      - api

@@ -5,7 +5,6 @@ export function JobDetails() {
   const cancelActiveJob = useJobsStore((s) => s.cancelActiveJob);
 
   if (!job) {
-    console.warn(123);
     return (
       <article>
         <p>Выбери задание из списка слева</p>
