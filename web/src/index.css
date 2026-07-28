@@ -3,6 +3,10 @@ html {
   border-radius: 30px;
 }
 
+li::marker {
+  content: ''; /* Overwrites the marker with an empty string */
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -10,7 +14,7 @@ html {
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: rgb(19, 22.5, 30.5);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

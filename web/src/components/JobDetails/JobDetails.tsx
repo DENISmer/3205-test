@@ -5,6 +5,7 @@ export function JobDetails() {
   const cancelActiveJob = useJobsStore((s) => s.cancelActiveJob);
 
   if (!job) {
+    console.warn(123);
     return (
       <article>
         <p>Выбери задание из списка слева</p>
@@ -15,32 +16,34 @@ export function JobDetails() {
   return (
     <article>
       <header>Задание {job.id.slice(0, 6)}</header>
-      <table>
-        <thead>
-          <tr>
-            <th scope="col">URL</th>
-            <th scope="col">Статус</th>
-            <th scope="col">HTTP</th>
-            <th scope="col">Ошибка</th>
-            <th scope="col">Время</th>
-          </tr>
-        </thead>
-        <tbody>
-          {job.urls.map((item) => (
-            <tr key={item.url}>
-              <th scope="row">{item.url}</th>
-              <td>{item.status}</td>
-              <td>{item.httpStatus ?? '—'}</td>
-              <td>{item.error ?? '—'}</td>
-              <td>
-                {item.durationMs
-                  ? `${(item.durationMs / 1000).toFixed(1)} с`
-                  : '—'}
-              </td>
+      <div className="overflow-auto">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">URL</th>
+              <th scope="col">Статус</th>
+              <th scope="col">HTTP</th>
+              <th scope="col">Ошибка</th>
+              <th scope="col">Время</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {job.urls.map((item) => (
+              <tr key={item.url}>
+                <th scope="row">{item.url}</th>
+                <td>{item.status}</td>
+                <td>{item.httpStatus ?? '—'}</td>
+                <td>{item.error ?? '—'}</td>
+                <td>
+                  {item.durationMs
+                    ? `${(item.durationMs / 1000).toFixed(1)} с`
+                    : '—'}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <button onClick={cancelActiveJob}>Отменить задание</button>
     </article>
   );

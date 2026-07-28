@@ -18,7 +18,9 @@ function App() {
 
   return (
     <>
-      <header className="container">URL checker</header>
+      <header className="container">
+        <h1 style={{ paddingTop: '10px' }}>URL checker</h1>
+      </header>
       <main className="container">
         {error && <p style={{ color: 'crimson' }}>{error}</p>}
         <div className="grid">
