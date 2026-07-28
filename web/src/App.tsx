@@ -4,6 +4,7 @@ import { JobList } from './components/JobList/JobList';
 import { JobDetails } from './components/JobDetails/JobDetails';
 import { useJobsStore } from './store/jobs.store';
 import { useJobPolling } from './hooks/useJobPolling';
+import { useJobListPolling } from './hooks/useJobListPolling';
 
 function App() {
   const activeJobId = useJobsStore((s) => s.activeJobId);
@@ -15,6 +16,7 @@ function App() {
   }, [refreshList]);
 
   useJobPolling(activeJobId);
+  useJobListPolling();
 
   return (
     <>
