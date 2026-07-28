@@ -1,0 +1,13 @@
+{
+  "name": "url-checker",
+  "private": true,
+  "scripts": {
+    "postinstall": "yarn --cwd api install && yarn --cwd web install",
+    "dev": "concurrently -n api,web -c blue,green \"yarn --cwd api start:dev\" \"yarn --cwd web dev\"",
+    "lint": "yarn --cwd api lint && yarn --cwd web lint",
+    "format": "yarn --cwd api format && yarn --cwd web format"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  }
+}

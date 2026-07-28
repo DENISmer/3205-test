@@ -1,3 +1,4 @@
+import { JobDetails } from './components/JobDetails/JobDetails';
 import { JobList } from './components/JobList/JobList';
 import { UrlForm } from './components/UrlForm/UrlForm';
 
@@ -11,7 +12,9 @@ function App() {
             <UrlForm />
             <JobList />
           </section>
-          <section></section>
+          <section>
+            <JobDetails />
+          </section>
         </div>
       </main>
     </>
